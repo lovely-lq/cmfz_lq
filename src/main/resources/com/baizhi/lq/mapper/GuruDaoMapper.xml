@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.lq.dao.GuruDao">
+    <select id="queryAll" resultType="Guru">
+         select * from guru
+    </select>
+    <insert id="insertGuru" parameterType="Guru">
+        insert into guru value (#{id},#{name},#{photo},#{status},#{nickName})
+    </insert>
+
+</mapper>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.lq.dao.UserDAO">
+    <select id="selectUserCount" resultType="Integer">
+        select count(*) from user where sex = #{sex} and DATE_SUB(NOW(),INTERVAL #{day} day) &lt; rigest_date
+    </select>
+
+    <select id="selectByLocation" resultType="UserDto">
+        select location name,count(*) value from user where sex=#{sex} group by location
+    </select>
+    <update id="updateUserMessage" parameterType="User">
+        update user
+        <set>
+            <if test="password!=null">password=#{password},</if>
+            <if test="phone!=null">phone=#{phone},</if>
+            <if test="name!=null">name=#{name},</if>
+            <if test="nick!=null">nick=#{nick},</if>
+            <if test="sex!=null">sex=#{sex},</if>
+            <if test="location!=null">location=#{location},</if>
+            <if test="status!=null">status=#{status},</if>
+            <if test="rigest_date!=null">rigest_date=#{rigest_date},</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <select id="selectByNear" resultType="User">
+        select * from user where id!=#{id} order by rigest_date desc limit 0,5
+    </select>
+</mapper>
